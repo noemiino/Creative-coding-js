@@ -41,8 +41,6 @@
       ball_x += speed_x;
       ball_y += speed_y;
 
-
-
     if (bounce(ball_x, 0 , w , min)) {
         speed_x *= -1;
         drawen();
@@ -51,10 +49,6 @@
     if (bounce(ball_y, 0 ,h , min)) {
         speed_y *=-1;
         drawen();
-
-      //   ball_size = random(14,40);
-      //   ball_y = ball_size/2;
-      //
        }
       // if (ball_y < 0 || ball_y > h) {
       //  speed_y *= -1;
