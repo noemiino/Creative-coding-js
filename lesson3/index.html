@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<title>Creative Coding Yea!</title>
+<head>
+    <meta charset="utf-8">
+<!-- <script src='http://connect.soundcloud.com/sdk.js'></script> -->
+<script language="javascript" src="libraries/creative_coding.js"></script>
+<script language="javascript" src="libraries/canvas.js"></script>
+
+
+<!-- <link rel="stylesheet" href="css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="css/style.css" type="text/css" media="screen" /> -->
+<!-- <link rel="stylesheet" href="css/audio.css" type="text/css" media="screen" /> -->
+
+</head>
+<body>
+
+<script type="text/javascript">
+
+var ctx = createCanvas("canvasuno");
+var number_of_balls  = 100;
+var balls = [];
+
+// push a ball and it's values into the array
+for (var i = 0; i < number_of_balls; i++) {
+
+  var ball = { //building the ball into an object
+    size : randomInt(4,30),
+    x : width/random(1,2),
+    y : height/random(1,2),
+    speed_x : randomInt(-5, 7),
+    speed_y : randomInt(-5, 7),
+    colour: rgb(0)
+  } // now the balls variables are axessible through ball.  (dot syntax)
+  balls.push(ball);
+  //console.log(balls[2]);
+}
+
+function draw() {
+
+  ctx.background(255, 0.2);
+  moveBall();
+  drawBall();
+
+} // end draw
+
+function moveBall() {
+
+  for (var i = 0; i < balls.length; i++) {
+    var b = balls[i];
+    b.x = b.x + b.speed_x;
+    b.y = b.y + b.speed_y;
+
+
+  if (bounce(b.x, 0 , w , b.size)) {
+    b.speed_x *= -1;
+    b.colour = rgb(0,0,randomInt(150,255));
+  }
+
+  if (bounce(b.y, 0 ,h , b.size)) {
+    b.speed_y *=-1;
+    b.colour = rgb(randomInt(150,255),0,0);
+  }
+} // end of for loop that goes through the array length and for each ball in an
+  //index it animates the bounce
+
+} // end moveBall
+
+function drawBall() {
+  for (var i = 0; i < balls.length; i++) {
+    var b = balls[i];
+    ctx.fillStyle = b.colour;
+    ctx.fillEllipse(b.x, b.y, b.size, b.size);
+  } // draws all the balls to the screen
+
+} // end drawBall
+
+
+  </script>
+
+<!-- <script language="javascript" src="js/soundcloud.js"></script> -->
+</body>
+</html>
