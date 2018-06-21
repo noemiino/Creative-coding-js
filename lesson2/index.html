@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<title>Creative Coding Yea!</title>
+<head>
+    <meta charset="utf-8">
+<!-- <script src='http://connect.soundcloud.com/sdk.js'></script> -->
+<script language="javascript" src="libraries/creative_coding.js"></script>
+<script language="javascript" src="libraries/canvas.js"></script>
+<!-- <script language="javascript" src="base.js"></script> -->
+
+<!-- <link rel="stylesheet" href="css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="css/style.css" type="text/css" media="screen" /> -->
+<!-- <link rel="stylesheet" href="css/audio.css" type="text/css" media="screen" /> -->
+
+</head>
+<body>
+
+  <script type="text/javascript">
+    // this is a function (from canvas.js) that sets you the canvas
+    // so you don't need to do any of the heavy lifting and can
+    // start playing straight away
+    // the function also lets you access the screen width as "width" or "w"
+    // and the screen height as "height" or "h"
+    var ctx = createCanvas("canvasuno");
+
+    var ball_size = 10;
+    var ball_x = width/2;
+    var ball_y = height/2;
+    var speed_x = randomInt(-5, 5);
+    var speed_y = randomInt(-5, 5);
+    var min = random (14,40);
+    var cola = randomColourTr();
+
+    // much like processing this is the drawing loop that plays repeatedly
+    // the actual syntax is a shortcut for requestAnimationFrame
+    function draw(){
+    // shortcut for clearing the screen, takes a rgb value 255,255,255 or a grey value of 0-255
+
+    // if (mousePressed){
+      ctx.background(255, 0.1);
+      ball_x += speed_x;
+      ball_y += speed_y;
+
+
+
+    if (bounce(ball_x, 0 , w , min)) {
+        speed_x *= -1;
+        drawen();
+      }
+
+    if (bounce(ball_y, 0 ,h , min)) {
+        speed_y *=-1;
+        drawen();
+
+      //   ball_size = random(14,40);
+      //   ball_y = ball_size/2;
+      //
+       }
+      // if (ball_y < 0 || ball_y > h) {
+      //  speed_y *= -1;
+      //  ball_size = random(14, 40);
+      // }
+      ctx.fillStyle = cola;
+      //ctx.fillStyle = rgba(0, 0, 255, 0.8);
+      ctx.fillEllipse(ball_x, ball_y, ball_size, ball_size);
+
+
+      //ctx.fillStyle = rgba(0, 0, 255, 0.8);
+      //ctx.fillEllipse(ball_x, ball_y, ball_size, ball_size);
+      // ctx.strokeEllipse(x, y, random(5, 50), random(1, 50));
+      //ctx.lineWidth = random(0.5, 2);
+      //ctx.strokeStyle = randomColourTr();
+      // }
+    } // end draw
+    function drawen(){
+      cola = randomColourTr();
+      ball_size = random(14,40);
+      //ctx.fillEllipse(ball_x, ball_y, ball_size, ball_size);
+    }
+
+  </script>
+
+<!-- <script language="javascript" src="js/soundcloud.js"></script> -->
+</body>
+
+</html>
