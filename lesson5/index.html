@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<title>Creative Coding Yea!</title>
+<head>
+    <meta charset="utf-8">
+<!-- <script src='http://connect.soundcloud.com/sdk.js'></script> -->
+<script language="javascript" src="libraries/creative_coding.js"></script>
+<script language="javascript" src="libraries/canvas.js"></script>
+
+
+<!-- <link rel="stylesheet" href="css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="css/style.css" type="text/css" media="screen" /> -->
+<!-- <link rel="stylesheet" href="css/audio.css" type="text/css" media="screen" /> -->
+
+</head>
+<body>
+
+<script type="text/javascript">
+
+var ctx = createCanvas("canvasuno");
+var max_balls  = 100;
+var balls = [];
+ctx.lineWidth = 2;
+var varto = "white";
+
+//ctx.fillStyle = gradiented(0,0,w,100,rgb(0,0, randomInt(100,255)), rgb(randomInt(100,255),0,0))
+
+// push a ball and it's values into the array
+//for (var i = 0; i < number_of_balls; i++) {
+for (var i = 0; i < randomInt(20,400); i++) {
+  addBall();
+}
+
+function addBall() {
+  var ball = { //building the ball into an object
+    size : randomInt(12,40),
+    x : random(w),
+    y : random(h),
+    speed_x : random(-5, 5),
+    speed_y : random(-0.5,3),
+    colour: "black",
+    rotation : random(1,1.5)
+  } // now the balls variables are axessible through ball.  (dot syntax)
+  balls.push(ball);
+  if (balls.length > randomInt(30,500)) balls.splice(0,1);
+  //console.log(balls[2]);
+}
+
+function draw() {
+  ctx.background(0,0,255,0.1);
+  moveBall();
+  drawBall();
+} // end draw
+
+function moveBall() {
+  for (var i = 0; i < balls.length; i++) {
+    var b = balls[i];
+    b.x = b.x + b.speed_x;
+    b.y = b.y + b.speed_y;
+    b.rotation += 2;
+    //var min = 500;
+
+    if (bounce(b.x, 0, w, b.size)) {
+      b.speed_x *=-1;
+      b.colour = gradiented(0,0,w,100,rgba(randomInt(100,255), 0, 0, random(0,1)), rgba(randomInt(0,100), 0, 0, random(0,1)) );
+      whatif();
+    }
+
+    // if ball goes over bottom reset it
+    if (bounce(b.y, 0 ,h, b.size)) {
+      b.speed_y *=-1;
+      b.colour = gradiented(0,0,w,100,rgba(randomInt(100,255), 0, 0, random(0,1)), rgba(randomInt(0,100), 0, 0, random(0,1)) );
+        whatif();
+    }
+
+  } // end of for loop that goes through the array length and for each ball in an
+    //index it animates the bounce
+
+} // end moveBall
+function whatif(){
+    var rand = randomInt(0,255);
+    if (rand <= 175){
+      return varto = rgb(255, 255, 255)
+    } else {
+      return varto = gradiented(0,0,w,100,rgba(randomInt(100,255), 0, 0, random(0,1)), rgba(randomInt(0,100), 0, 0, random(0,1)) )
+    }
+console.log(varto)
+}
+
+function drawBall() {
+  for (var i = 0; i < balls.length; i++) {
+    var b = balls[i];
+
+    ctx.fillStyle = b.colour;
+    ctx.save(); // save the current state of the canvas
+    ctx.translate(b.x, b.y); // move the centrepoint to that of your object you want to rotate
+    ctx.rotateDegrees(b.rotation); // rotate your object with ctx.rotate() or ctx.rotateDegrees()
+    ctx.outlinedPolygon(+10, 36, 30, b.size, b.varto,  b.colour); // draw shapes
+    ctx.restore(); //// restore to the original state of the canvas
+  } // draws all the balls to the screen
+} // end drawBall
+
+
+  </script>
+
+<!-- <script language="javascript" src="js/soundcloud.js"></script> -->
+</body>
+</html>
