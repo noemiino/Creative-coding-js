@@ -1,3 +1,3 @@
 
-![alt text](https://github.com/noemiino/Creative-coding-js/blob/mouse-followed/lesson3/bouncyball.gif)
+![alt text](https://github.com/noemiino/Creative-coding-js/blob/mouse-followed/lesson3/mouse-follow.gif)
 
