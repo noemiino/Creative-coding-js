@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<title>Creative Coding Yea!</title>
+<head>
+    <meta charset="utf-8">
+<!-- <script src='http://connect.soundcloud.com/sdk.js'></script> -->
+<script language="javascript" src="libraries/creative_coding.js"></script>
+<script language="javascript" src="libraries/canvas.js"></script>
+
+
+<!-- <link rel="stylesheet" href="css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="css/style.css" type="text/css" media="screen" /> -->
+<!-- <link rel="stylesheet" href="css/audio.css" type="text/css" media="screen" /> -->
+
+</head>
+<body>
+
+<script type="text/javascript">
+
+var ctx = createCanvas("canvasuno");
+var max_balls  = 400;
+var balls = [];
+
+// push a ball and it's values into the array
+//for (var i = 0; i < number_of_balls; i++) {
+for (var i = 0; i < max_balls; i++) {
+  addBall();
+}
+
+function addBall() {
+  var ball = { //building the ball into an object
+    size : randomInt(4,30),
+    x : random(w),
+    y : random(-20,0),
+    speed_x : 0,
+    speed_y : random(0.5,3),
+    colour: rgba(random(120,255),0,0,random(0,1))
+  } // now the balls variables are axessible through ball.  (dot syntax)
+  balls.push(ball);
+  //if (balls.length > max_balls) balls.splice(0,1);
+  //console.log(balls[2]);
+}
+
+function draw() {
+
+  ctx.background(0,0,255,0.02);
+
+  moveBall();
+  drawBall();
+
+} // end draw
+
+function moveBall() {
+
+  for (var i = 0; i < balls.length; i++) {
+    var b = balls[i];
+    b.x = b.x + b.speed_x;
+    b.y = b.y + b.speed_y;
+    //var min = 500;
+
+    // if ball goes over bottom reset it
+     if (b.y > h) {
+        b.y = random(-100,0);
+        b.colour = rgb(randomInt(255));
+     }
+} // end of for loop that goes through the array length and for each ball in an
+  //index it animates the bounce
+
+} // end moveBall
+
+function drawBall() {
+  for (var i = 0; i < balls.length; i++) {
+    var b = balls[i];
+    ctx.fillStyle = b.colour;
+    ctx.fillEllipse(b.x, b.y, b.size, b.size);
+  } // draws all the balls to the screen
+
+} // end drawBall
+
+
+  </script>
+
+<!-- <script language="javascript" src="js/soundcloud.js"></script> -->
+</body>
+</html>
