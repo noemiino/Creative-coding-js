@@ -18,27 +18,31 @@
 <script type="text/javascript">
 
 var ctx = createCanvas("canvasuno");
-var number_of_balls  = 100;
+var max_balls  = 40;
 var balls = [];
 
 // push a ball and it's values into the array
-for (var i = 0; i < number_of_balls; i++) {
-
+//for (var i = 0; i < number_of_balls; i++) {
+function addBall() {
   var ball = { //building the ball into an object
     size : randomInt(4,30),
-    x : width/random(1,2),
-    y : height/random(1,2),
+    x : mouseX + random(100,150),
+    y : mouseY + random(20,100),
     speed_x : randomInt(-5, 7),
     speed_y : randomInt(-5, 7),
-    colour: rgb(0)
+    colour: rgba(random(120,255),0,0,random(0,1))
   } // now the balls variables are axessible through ball.  (dot syntax)
   balls.push(ball);
+  if (balls.length > max_balls) balls.splice(0,1);
   //console.log(balls[2]);
 }
 
 function draw() {
 
-  ctx.background(255, 0.2);
+  ctx.background(0,0,255,0.02);
+  if (mouseMoved) {
+    addBall();
+  }
   moveBall();
   drawBall();
 
@@ -50,16 +54,18 @@ function moveBall() {
     var b = balls[i];
     b.x = b.x + b.speed_x;
     b.y = b.y + b.speed_y;
+    var min = 50;
 
-
-  if (bounce(b.x, 0 , w , b.size)) {
+  if (bounce(b.x, 0 , w , min)) {
     b.speed_x *= -1;
-    b.colour = rgb(0,0,randomInt(150,255));
+    b.colour = rgba(random(150,255),0,0,random(0,1));
+    b.size = random(14,50);
   }
 
-  if (bounce(b.y, 0 ,h , b.size)) {
+  if (bounce(b.y, 0 ,h , min)) {
     b.speed_y *=-1;
-    b.colour = rgb(randomInt(150,255),0,0);
+    b.colour = rgba(random(150,255),0,0,random(0,1));
+    b.size = random(14,50);
   }
 } // end of for loop that goes through the array length and for each ball in an
   //index it animates the bounce
