@@ -20,29 +20,30 @@
 var ctx = createCanvas("canvasuno");
 var max_balls  = 400;
 var balls = [];
+//ctx.fillStyle = gradiented(0,0,w,100,rgb(0,0, randomInt(100,255)), rgb(randomInt(100,255),0,0))
 
 // push a ball and it's values into the array
 //for (var i = 0; i < number_of_balls; i++) {
-for (var i = 0; i < max_balls; i++) {
+for (var i = 0; i < randomInt(30,5000); i++) {
   addBall();
 }
 
 function addBall() {
   var ball = { //building the ball into an object
-    size : randomInt(4,30),
+    size : randomInt(20,50),
     x : random(w),
     y : random(-20,0),
     speed_x : 0,
     speed_y : random(0.5,3),
-    colour: rgba(random(120,255),0,0,random(0,1))
+    colour: gradiented(0,200,w,0,rgb(0,0,0), rgb(randomInt(100,255),0,0))
   } // now the balls variables are axessible through ball.  (dot syntax)
   balls.push(ball);
-  if (balls.length > max_balls) balls.splice(0,1);
+  //if (balls.length > randomInt(30,5000)) balls.splice(0,1);
   //console.log(balls[2]);
 }
 
 function draw() {
-  ctx.background(0,0,255,0.02);
+  ctx.background(0,0,255,0.01);
   moveBall();
   drawBall();
 } // end draw
@@ -63,7 +64,7 @@ function moveBall() {
 } // end moveBall
 function resetBall(_b) {
   _b.y = random(-100,0);
-  _b.colour = rgb(randomInt(255));
+  _b.colour = gradiented(0,200,w,0,rgb(255,randomInt(100,255),randomInt(100,255)), rgb(randomInt(100,255),0,0));
 }
 
 function drawBall() {
