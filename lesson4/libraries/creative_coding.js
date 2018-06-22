@@ -493,6 +493,33 @@ function randomInt(min, max) {
  return Math.floor(Math.random() * (max+1-min)) +min;
 }
 
+function gradiented(x1, y1, a1, b1, rgb1, rgb2) {
+  if (x1 == undefined) {
+    x1 = 0;
+  }
+  if (y1 == undefined) {
+    y1 = 0;
+  }
+  if (rgb1 == undefined) {
+    rgb1 = randomColour();
+  }
+  if (rgb2 == undefined) {
+    rgb2 = randomColour();
+  }
+  if (a1 == undefined) {
+    //_width  = Math.abs(200);
+    a1 = _width;
+
+  }
+  if (b1 == undefined) {
+    b1 = 0;
+  }
+  var grd = ctx.createLinearGradient(x1,y1,a1,b1);
+  grd.addColorStop(0, rgb1);
+  grd.addColorStop(1, rgb2);
+  return ctx.fillStyle = grd;
+
+}
 
 function randomColourTr(){
   var r = randomInt(255);
