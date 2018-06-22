@@ -1,1 +1,1 @@
-![alt text](https://github.com/noemiino/Creative-coding-js/blob/master/rainy.gif)
+![alt text](https://github.com/noemiino/Creative-coding-js/blob/master/lesson4/rainy.gif)
